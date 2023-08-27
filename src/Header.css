@@ -1,0 +1,23 @@
+header {
+  background-color: #3b2632;
+  height: 50px;
+}
+
+#brand {
+  color: #fff;
+  float: left;
+  font-size: 30px;
+}
+
+#social {
+  float: right;
+  margin-top: 8px;
+}
+.btn-danger {
+  margin-left: 5px;
+}
+
+.btn-info {
+  margin-left: 30px;
+  margin-top: 8px;
+}
