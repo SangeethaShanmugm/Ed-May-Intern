@@ -17,12 +17,41 @@ export default class Details extends Component {
       menuList: "",
       mealId: sessionStorage.getItem("mealId"),
       userItem: "",
+      totalPrice: ""
     };
   }
 
   addToCart = (data) => {
     this.setState({ userItem: data });
     console.log(this.state.userItem);
+    let menuId = sessionStorage.getItem("menu")
+    let orderId = []
+    console.log(menuId)
+    let result = menuId.split(",").map((item) => {
+      orderId.push(parseInt(item))
+      return "ok"
+    })
+    console.log(result)
+    fetch(`${url}/menuItem`, {
+      method: "POST",
+      body: JSON.stringify(orderId),
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("MenuData", data)
+        let totalPrice = 0;
+        data.map((item) => {
+          totalPrice = totalPrice + parseFloat(item.menu_price)
+          return "success"
+        })
+        console.log(totalPrice)
+        totalPrice = sessionStorage.setItem("totalPrice", totalPrice)
+      }
+      )
   };
 
   proceed = () => {

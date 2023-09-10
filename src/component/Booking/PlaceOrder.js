@@ -11,7 +11,7 @@ export const PlaceOrder = (props) => {
   let data = JSON.parse(sessionData)
   console.log(data)
 
-  let finalCost = 0;
+
   const initialValue = {
     id: Math.floor(Math.random() * 100000),
     rest_name: props.match.params.restName,
@@ -19,7 +19,7 @@ export const PlaceOrder = (props) => {
     email: data.email,
     phone: data.phone,
     address: "plot no 35,Delhi",
-    cost: finalCost,
+    cost: sessionStorage.getItem("totalPrice"),
 
   }
   const [values, setValues] = useState(initialValue)
@@ -33,38 +33,18 @@ export const PlaceOrder = (props) => {
   }
 
 
-  
+
   const checkout = () => {
     console.log(values)
-    let menuId = sessionStorage.getItem("menu")
-    let orderId = []
-    console.log(menuId)
-    let result = menuId.split(",").map((item) => {
-      orderId.push(parseInt(item))
-      return "ok"
-    })
-    console.log(result)
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify(orderId),
+    fetch(purl, {
+      method: 'POST',
       headers: {
         accept: "application/json",
         "Content-Type": "application/json"
-      }
+      },
+      body: JSON.stringify(values),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("MenuData", data)
-        let totalPrice = 0;
-        data.map((item) => {
-          totalPrice = totalPrice + parseFloat(item.menu_price)
-          return "success"
-        })
-        console.log(values.cost)
-        finalCost = values.cost + totalPrice
-        console.log(finalCost)
-      }
-      )
+      .then((props.history.push("/viewBooking")))
 
   }
   return (

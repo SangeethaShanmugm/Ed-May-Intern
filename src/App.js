@@ -9,6 +9,7 @@ import { PlaceOrder } from "./component/Booking/PlaceOrder";
 import Login from "./component/auth/Login";
 import Register from "./component/auth/Register";
 import { RestCountry } from "./RestCountry";
+import { ViewOrder } from "./component/Booking/viewOrder"
 function App() {
   return (
     <BrowserRouter>
@@ -19,7 +20,7 @@ function App() {
         <Route path="/placeOrder/:restName" component={PlaceOrder} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
-        <Route path="/rest" component={RestCountry} />
+        <Route path="/viewBooking" component={ViewOrder} />
         <Footer />
       </div>
     </BrowserRouter>
